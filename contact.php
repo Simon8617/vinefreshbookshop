@@ -2,7 +2,7 @@
 // contact.php
 include("db.php");
 
-// Handle AJAX request (same as before)
+// Handle AJAX request
 if (isset($_POST['ajax']) && $_POST['ajax'] == "1") {
     $name    = mysqli_real_escape_string($conn, $_POST['name']);
     $email   = mysqli_real_escape_string($conn, $_POST['email']);
@@ -48,7 +48,7 @@ body {
   padding: 0;
 }
 .container {
-  width: 600px;
+  max-width: 700px;
   margin: 50px auto;
   background: #fff;
   padding: 30px;
@@ -58,7 +58,7 @@ body {
 h2 {
   text-align: center;
   margin-bottom: 20px;
-  color: #333;
+  color: #0066cc;
 }
 .form-group {
   margin-bottom: 15px;
@@ -98,7 +98,7 @@ button:hover {
   text-align: center;
   font-weight: bold;
 }
-.social {
+.social, .contact-info {
   text-align: center;
   margin-top: 25px;
 }
@@ -110,6 +110,26 @@ button:hover {
 }
 .social a:hover {
   color: #0066cc;
+}
+.contact-info p {
+  margin: 8px 0;
+  font-size: 16px;
+  color: #333;
+}
+.contact-info i {
+  margin-right: 8px;
+  color: #0066cc;
+}
+.home-link {
+  display: inline-block;
+  margin-top: 15px;
+  text-decoration: none;
+  color: #0066cc;
+  font-weight: bold;
+  transition: 0.3s;
+}
+.home-link:hover {
+  text-decoration: underline;
 }
 </style>
 </head>
@@ -136,9 +156,15 @@ button:hover {
     </div>
     <input type="hidden" name="ajax" value="1">
     <button type="submit"><i class="fa fa-paper-plane"></i> Send Message</button>
-    <strong class="fa fa button"><a href="index.php">Home</a></strong>
   </form>
   <div id="response"></div>
+
+  <!-- Static Contact Info -->
+  <div class="contact-info">
+    <p><i class="fa fa-envelope"></i> chimeifeanyi180@gmail.com</p>
+    <p><i class="fa fa-phone"></i> 07066078281</p>
+    <a class="home-link" href="index.php"><i class="fa fa-home"></i> Back to Home</a>
+  </div>
 
   <!-- Dynamic Social Links -->
   <div class="social">

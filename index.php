@@ -1,4 +1,8 @@
 <?php
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
+
 // Start session and include DB connection
 session_start();
 include('db.php');
@@ -30,17 +34,16 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['subscribe'])) {
     }
 
     echo $response;
-    exit; // stop further execution for AJAX
+    exit;
 }
 
-// Fetch social links from DB
+// Fetch social links
 $socialLinks = [];
 $result = $conn->query("SELECT * FROM social_links LIMIT 1");
 if ($result && $result->num_rows > 0) {
     $socialLinks = $result->fetch_assoc();
 }
 ?>
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -171,8 +174,19 @@ if ($result && $result->num_rows > 0) {
     footer {
       background: #222;
       color: #fff;
-      padding: 30px 20px;
+      padding: 40px 20px;
       text-align: center;
+    }
+    footer .contact-info {
+      margin-bottom: 20px;
+    }
+    footer .contact-info p {
+      margin: 8px 0;
+      font-size: 15px;
+    }
+    footer .contact-info i {
+      margin-right: 8px;
+      color: #00aaff;
     }
     footer .social-icons { margin: 15px 0; }
     footer .social-icons a {
@@ -181,7 +195,7 @@ if ($result && $result->num_rows > 0) {
       font-size: 1.4rem;
       transition: 0.3s;
     }
-    footer .social-icons a:hover { color: #0077cc; }
+    footer .social-icons a:hover { color: #00aaff; }
   </style>
 </head>
 <body>
@@ -211,7 +225,6 @@ if ($result && $result->num_rows > 0) {
   <div class="marquee-container">
     <div class="marquee">
       <img src="assets/images/yel.png" alt="Banner 1">
-      <!--<img src="assets/images/vine2.png" alt="Banner 2">-->
     </div>
   </div>
 
@@ -227,7 +240,11 @@ if ($result && $result->num_rows > 0) {
 
   <!-- Footer -->
   <footer>
-    <p>&copy; <?= date("Y") ?> Vinefresh Bookshop | All Rights Reserved</p>
+    <div class="contact-info">
+      <p><i class="fa fa-envelope"></i> chimeifeanyi180@gmail.com</p>
+      <p><i class="fa fa-phone"></i> 07066078281</p>
+      <p><i class="fa fa-map-marker-alt"></i> Opposite Ozalla Health Center, Nkanu West, Enugu State, Nigeria</p>
+    </div>
     <div class="social-icons">
       <?php if (!empty($socialLinks['facebook'])): ?>
         <a href="<?= $socialLinks['facebook'] ?>" target="_blank"><i class="fab fa-facebook"></i></a>
@@ -242,6 +259,7 @@ if ($result && $result->num_rows > 0) {
         <a href="<?= $socialLinks['linkedin'] ?>" target="_blank"><i class="fab fa-linkedin"></i></a>
       <?php endif; ?>
     </div>
+    <p>&copy; <?= date("Y") ?> Vinefresh Bookshop | All Rights Reserved</p>
     <p><a href="admin_login.php" style="color: #00aaff; font-weight: bold;">Admin Login</a></p>
   </footer>
 
